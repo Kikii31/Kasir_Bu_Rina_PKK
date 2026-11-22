@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#d94343" />
+    <title>Kasir Bu Rina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="assets/js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">R</div>
+        <div>
+          <h1>Kasir Bu Rina</h1>
+          <p>Aplikasi kasir sederhana</p>
+        </div>
+      </div>
+      <div class="top-meta">
+        <div class="clock">
+          <strong id="clock">--:--</strong
+          ><span id="today">Memuat tanggal...</span>
+        </div>
+        <div class="top-dot" aria-hidden="true">↗</div>
+      </div>
+    </header>
+
+    <main class="shell">
+      <div class="dashboard">
+        <aside class="side-column">
+          <div class="store-card">
+            <div class="store-icon">▣</div>
+            <div>
+              <strong>Toko Bu Rina</strong
+              ><small>Warung makan &amp; minuman</small>
+            </div>
+          </div>
+          <div class="notice">
+            <b>!</b
+            ><span
+              >Pastikan setiap transaksi dicatat agar laporan penjualan tetap
+              rapi.</span
+            >
+          </div>
+          <div class="shift-card">
+            <div>
+              <div class="shift-icon">▣</div>
+              <strong>Siap melayani pembeli?</strong>
+              <p>Mulai transaksi kasir Bu Rina.</p>
+            </div>
+            <button type="button" data-scroll="pos">Buka Kasir</button>
+          </div>
+          <div class="section-label">Ringkasan Hari Ini</div>
+          <div class="summary-grid" id="summary">
+            <div class="summary-card green">
+              <div class="summary-symbol">↗</div>
+              <div>
+                <span>Penjualan</span><strong id="sales-today">Rp0</strong
+                ><small>Hari ini</small>
+              </div>
+            </div>
+            <div class="summary-card blue">
+              <div class="summary-symbol">▤</div>
+              <div>
+                <span>Transaksi</span><strong id="transactions-today">0</strong
+                ><small>Transaksi</small>
+              </div>
+            </div>
+            <div class="summary-card orange">
+              <div class="summary-symbol">▦</div>
+              <div>
+                <span>Stok Produk</span><strong id="product-total">0</strong
+                ><small>Jenis produk</small>
+              </div>
+            </div>
+            <div class="summary-card red">
+              <div class="summary-symbol">⌁</div>
+              <div>
+                <span>Rata-rata</span><strong id="average-sale">Rp0</strong
+                ><small>Per transaksi</small>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <section class="main-column">
+          <div class="menu-area">
+            <div class="menu-heading">Menu Utama</div>
+            <div class="menu-grid">
+              <button class="menu-tile" type="button" data-scroll="pos">
+                <span class="menu-icon c-green">▣</span><span>Kasir</span>
+              </button>
+              <button
+                class="menu-tile"
+                type="button"
+                data-scroll="products-panel"
+              >
+                <span class="menu-icon c-orange">▤</span><span>Produk</span>
+              </button>
+              <button
+                class="menu-tile"
+                type="button"
+                data-scroll="history-panel"
+              >
+                <span class="menu-icon c-pink">▧</span><span>Penjualan</span>
+              </button>
+              <button
+                class="menu-tile"
+                type="button"
+                data-scroll="history-panel"
+              >
+                <span class="menu-icon c-blue">▥</span><span>Laporan</span>
+              </button>
+            </div>
+          </div>
+
+          <section class="panel" id="pos">
+            <div class="panel-title">
+              <h2>Transaksi Kasir</h2>
+              <span class="pill">KASIR AKTIF</span>
+            </div>
+            <div class="pos-grid">
+              <div class="product-area">
+                <div class="panel-title">
+                  <h3>Pilih Produk</h3>
+                  <span class="subtle">Tekan produk untuk menambahkan</span>
+                </div>
+                <input
+                  class="search"
+                  id="search"
+                  type="search"
+                  placeholder="Cari nama produk..."
+                  aria-label="Cari produk"
+                />
+                <div class="products" id="products">
+                  <div class="empty-search">Menghubungkan ke database...</div>
+                </div>
+              </div>
+              <aside class="cart-card">
+                <div class="cart-head">
+                  <strong>Keranjang Belanja</strong
+                  ><span class="item-count" id="item-count">0 item</span>
+                </div>
+                <div class="cart-list" id="cart-list">
+                  <div class="cart-empty">
+                    Keranjang masih kosong.<br />Pilih produk untuk memulai.
+                  </div>
+                </div>
+                <div class="total-box">
+                  <div class="sum-row">
+                    <span>Subtotal</span><strong id="subtotal">Rp0</strong>
+                  </div>
+                  <div class="sum-row total">
+                    <span>Total Bayar</span><strong id="total">Rp0</strong>
+                  </div>
+                </div>
+                <div class="payment">
+                  <label for="paid">Uang diterima (Rp)</label
+                  ><input
+                    id="paid"
+                    type="number"
+                    min="0"
+                    step="500"
+                    inputmode="numeric"
+                    placeholder="Contoh: 50000"
+                  />
+                  <div class="change">
+                    <span>Kembalian</span><strong id="change">Rp0</strong>
+                  </div>
+                </div>
+                <button
+                  class="btn btn-red checkout"
+                  id="checkout"
+                  type="button"
+                >
+                  Selesaikan Transaksi
+                </button>
+                <div class="receipt" id="receipt" aria-live="polite"></div>
+              </aside>
+            </div>
+          </section>
+
+          <section class="panel" id="products-panel">
+            <div class="panel-title">
+              <div>
+                <h2>Kelola Produk</h2>
+                <span class="subtle"
+                  >Tambah, ubah, atau nonaktifkan produk toko</span
+                >
+              </div>
+              <span class="pill">DATABASE MYSQL</span>
+            </div>
+            <form id="product-form" class="product-form">
+              <input type="hidden" id="product-id" />
+              <div class="field">
+                <label for="product-name">Nama produk</label
+                ><input
+                  id="product-name"
+                  required
+                  maxlength="100"
+                  placeholder="Contoh: Nasi goreng"
+                />
+              </div>
+              <div class="field">
+                <label for="product-category">Kategori</label
+                ><input
+                  id="product-category"
+                  maxlength="60"
+                  placeholder="Makanan / Minuman"
+                />
+              </div>
+              <div class="field">
+                <label for="product-price">Harga (Rp)</label
+                ><input
+                  id="product-price"
+                  type="number"
+                  min="1"
+                  step="1"
+                  required
+                  placeholder="15000"
+                />
+              </div>
+              <div class="field">
+                <label for="product-stock">Stok</label
+                ><input
+                  id="product-stock"
+                  type="number"
+                  min="0"
+                  step="1"
+                  required
+                  placeholder="20"
+                />
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-red" id="save-product" type="submit">
+                  Simpan Produk</button
+                ><button
+                  class="btn btn-light"
+                  id="cancel-edit"
+                  type="button"
+                  hidden
+                >
+                  Batal
+                </button>
+              </div>
+            </form>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nama Produk</th>
+                    <th>Kategori</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="product-table">
+                  <tr>
+                    <td colspan="5" class="table-empty">Memuat produk...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel history-panel" id="history-panel">
+            <div class="panel-title">
+              <div>
+                <h2>Riwayat Penjualan</h2>
+                <span class="subtle"
+                  >Transaksi terbaru yang tersimpan di MySQL</span
+                >
+              </div>
+              <button class="btn btn-light" id="refresh-data" type="button">
+                Muat ulang
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No. Invoice</th>
+                    <th>Waktu</th>
+                    <th>Total</th>
+                    <th>Bayar</th>
+                    <th>Kembalian</th>
+                  </tr>
+                </thead>
+                <tbody id="sales-table">
+                  <tr>
+                    <td colspan="5" class="table-empty">Memuat riwayat...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </div>
+      <footer class="foot">
+        Kasir Bu Rina · HTML, CSS, JavaScript, PHP &amp; MySQL
+      </footer>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
